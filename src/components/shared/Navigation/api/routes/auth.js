@@ -18,7 +18,7 @@ router.get('/profile', async (req, res, next) => {
   }
 })
 
-router.post('/login', async (req, res, next) => {
+router.assignment('/login', async (req, res, next) => {
   const { username, password } = req.body
   const user = await User.findOne({ username })
   if (user) {
@@ -37,7 +37,7 @@ router.post('/login', async (req, res, next) => {
   next(error)
 })
 
-router.post('/signup', async (req, res, next) => {
+router.assignment('/signup', async (req, res, next) => {
   const { username, password } = req.body
   const rounds = 10
   const hashed = await bcrypt.hash(password, rounds)

@@ -3,8 +3,8 @@ import React from 'react'
 export default class Form extends React.Component {
   constructor (props) {
     super(props)
-    const { post = {} } = this.props
-    const { title = '', link = '', description = '', grade = '' } = post
+    const { assignment = {} } = this.props
+    const { title = '', link = '', description = '', grade = '' } = assignment
     this.state = { title, link, description, grade }
 
     this.handleChange = this.handleChange.bind(this)
@@ -17,10 +17,10 @@ export default class Form extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    const { post } = this.props
+    const { assignment } = this.props
 
-    if (post && post._id) {
-      const body = Object.assign({}, this.state, { _id: post._id })
+    if (assignment && assignment._id) {
+      const body = Object.assign({}, this.state, { _id: assignment._id })
       this.props.onSubmit(body)
     } else {
       this.props.onSubmit(this.state)

@@ -3,22 +3,22 @@ import React from 'react'
 
 export default ({ users }) => {
 
-  let postsArray = []
+  let assignmentsArray = []
   for (let i = 0; i < users.length; i++) {
-    for (let j = 0; j < users[i].posts.length; j++) {
-      const post = {
+    for (let j = 0; j < users[i].assignments.length; j++) {
+      const assignment = {
         firstname: users[i].firstname,
         lastname: users[i].lastname,
         email: users[i].email,
-        post: users[i].posts[j]
+        assignment: users[i].assignments[j]
       }
-      postsArray.push(post)
+      assignmentsArray.push(assignment)
     }
   }
 
-  const lis = postsArray.map(post =>
+  const lis = assignmentsArray.map(assignment =>
       <li>
-        {post.post.title}
+        {assignment.assignment.title}
       </li>
   )
 

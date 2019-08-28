@@ -16,8 +16,8 @@ const AuthenticatedLinks = ({ currentUserId, history, logoutUser }) => {
         </Link>
       </li>
       <li className='nav-item'>
-        <Link className='nav-link' to={`/users/${currentUserId}/posts/new`}>
-            Create a New Post
+        <Link className='nav-link' to={`/users/${currentUserId}/assignments/new`}>
+            Create a New Assignment
         </Link>
       </li>
       <li className='nav-item'>
