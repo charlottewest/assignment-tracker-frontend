@@ -5,6 +5,7 @@ class Form extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      error: '',
       username: '',
       password: '',
       firstName: '',
@@ -19,54 +20,27 @@ class Form extends React.Component {
     this.setState({ [name]: value })
   }
 
-  // handleChange (event) {
-  //   const name = event.target.name;
-  //   const value = event.target.value;
-  //
-  //   this.setState({
-  //     formControls: {
-  //       ...this.state.formControls,
-  //       [name]: value
-  //     }
-  //   });
-  //
-  // }
-
   handleSubmit (e) {
+    this.setState({error: ''})
     e.preventDefault()
     this.props.onSubmit(this.state)
       .then(() => this.props.history.push('/users'))
+      // .then(response => {
+      //   if (response && response.status !== 200) {
+      //     this.setState({error: response.message})
+      //   } else {
+      //     this.props.history.push('/users')
+      //   }
+      // })
   }
 
   render () {
+    let error;
+    if (this.state.error) {
+      error = <div>{this.state.error}</div>;
+    }
+
     const signup = this.props.location.pathname === '/signup'
-    // let signUpControls;
-    // if (this.props.location.pathname === '/signup') {
-    //   signUpControls = (
-    //     <div>
-    //       <div className='form-group'>
-    //         <label htmlFor='username'>First Name</label>
-    //         <input
-    //           className='form-control'
-    //           id='firstname'
-    //           onChange={this.handleChange}
-    //           name='username'
-    //           type='text'
-    //           value={this.state.firstName} />
-    //       </div>
-    //       <div className='form-group'>
-    //         <label htmlFor='password'>Last Name</label>
-    //         <input
-    //           className='form-control'
-    //           id='lastname'
-    //           onChange={this.handleChange}
-    //           name='username'
-    //           type='text'
-    //           value={this.state.lastName} />
-    //       </div>
-    //     </div>
-    //   )
-    // }
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -119,6 +93,7 @@ class Form extends React.Component {
           : null
         }
         <button type='submit' className='btn btn-primary'>Submit</button>
+        {error}
       </form>
     )
   }

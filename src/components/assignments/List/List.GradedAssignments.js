@@ -1,7 +1,8 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
 
-export default ({ users }) => {
+import EditGradeForm from '../Form/EditGrade.Form'
+
+export default ({ users, onSubmit }) => {
 
   let assignmentsArray = []
   for (let i = 0; i < users.length; i++) {
@@ -20,7 +21,8 @@ export default ({ users }) => {
 
   const lis = assignmentsArray.map(assignment =>
       <li>
-        {assignment.assignment.title} {assignment.assignment.grade}
+        Assignment: {assignment.assignment.title} Grade: {assignment.assignment.grade}
+        <EditGradeForm onSubmit={onSubmit} assignment={assignment.assignment} />
       </li>
   )
 

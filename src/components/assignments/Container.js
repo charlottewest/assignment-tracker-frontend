@@ -10,6 +10,9 @@ import List from './List/List'
 import EditForm from './Form/Edit.Form'
 import NewForm from './Form/New.Form'
 
+import GradedAssignments from './List/List.GradedAssignments'
+import UngradedAssignments from './List/List.UngradedAssignments'
+
 class Container extends React.Component {
   constructor (props) {
     super(props)
@@ -46,7 +49,7 @@ class Container extends React.Component {
   }
 
   render () {
-    const { currentUserId, isAdmin, users } = this.props
+    const { currentUserId, users } = this.props
     return (
       <>
         <Route path='/users/:userId/assignments' exact component={({ match }) => {
@@ -58,6 +61,10 @@ class Container extends React.Component {
               user={user} />
           )
         }} />
+
+        <Route path='/users/assignments/ungraded' exact component={() => <UngradedAssignments users={users} />} />
+        <Route path='/users/assignments/graded' exact component={() => <GradedAssignments users={users} onSubmit={this.editAssignment}/>} />
+
         <Route path='/users/:userId/assignments/new' exact component={() => {
           return <NewForm onSubmit={this.createAssignment} />
         }} />
@@ -66,7 +73,9 @@ class Container extends React.Component {
           const assignment = user.assignments.find(user => user._id === match.params.assignmentId)
           return <EditForm onSubmit={this.editAssignment} assignment={assignment} />
         }} />
+
       </>
+
     )
   }
 }
