@@ -25,6 +25,7 @@ class Form extends React.Component {
     e.preventDefault()
     this.props.onSubmit(this.state)
       .then(() => this.props.history.push('/users'))
+      // I really wish this worked so I'm not deleting it
       // .then(response => {
       //   if (response && response.status !== 200) {
       //     this.setState({error: response.message})
