@@ -11,7 +11,6 @@ router.get('/profile', async (req, res, next) => {
     const status = 200
     res.json({ status, user })
   } catch (e) {
-    console.error(e)
     const error = new Error('You are not authorized to access this route.')
     error.status = 401
     next(error)

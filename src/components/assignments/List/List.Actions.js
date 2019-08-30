@@ -5,7 +5,8 @@ import moment from 'moment'
 
 const ListActions = ({ currentUserId, isAdmin, destroyAssignment, assignment, user }) => {
   let editOptions
-  if (currentUserId || isAdmin) {
+
+  if (currentUserId === user._id) {
     editOptions = (
       <>
         <Link className='btn btn-link' to={`/users/${user._id}/assignments/${assignment._id}/edit`}>Edit Assignment</Link>
@@ -20,7 +21,6 @@ const ListActions = ({ currentUserId, isAdmin, destroyAssignment, assignment, us
   return (
     <div className='card-footer text-muted d-flex justify-content-around'>
       {editOptions}
-
 
       <span className='btn btn-link text-muted' disabled>Created {moment(assignment.created_at).fromNow()}</span>
     </div>

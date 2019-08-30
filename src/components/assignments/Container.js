@@ -48,8 +48,18 @@ class Container extends React.Component {
     history.push(`/users/${currentUserId}/assignments`)
   }
 
+  async editGrade (assignment) {
+    const { currentUserId, history, refreshUsers } = this.props
+
+    await assignments.updateGrade({ user: { _id: currentUserId }, assignment })
+    await refreshUsers()
+
+    history.push(`/users/${currentUserId}/assignments`)
+  }
+
   render () {
-    const { currentUserId, users } = this.props
+    const { currentUserId, isAdmin, users } = this.props
+
     return (
       <>
         <Route path='/users/:userId/assignments' exact component={({ match }) => {
@@ -57,13 +67,18 @@ class Container extends React.Component {
           return (
             <List
               currentUserId={currentUserId}
+              isAdmin={isAdmin}
               destroyAssignment={this.destroyAssignment}
               user={user} />
           )
         }} />
 
-        <Route path='/users/assignments/ungraded' exact component={() => <UngradedAssignments users={users} />} />
-        <Route path='/users/assignments/graded' exact component={() => <GradedAssignments users={users} onSubmit={this.editAssignment}/>} />
+        <Route path='/users/:userId/assignments/graded/edit' exact component={() => {
+          return <GradedAssignments users={users} onSubmit={this.editGrade}/>
+        }} />
+        <Route path='/users/:userId/assignments/ungraded/edit' exact component={() => {
+          return <UngradedAssignments users={users} onSubmit={this.editGrade}/>
+        }} />
 
         <Route path='/users/:userId/assignments/new' exact component={() => {
           return <NewForm onSubmit={this.createAssignment} />

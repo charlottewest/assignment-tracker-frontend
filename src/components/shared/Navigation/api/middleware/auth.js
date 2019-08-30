@@ -11,7 +11,6 @@ const isLoggedIn = (req, _res, next) => {
     decodeToken(req.token)
     next()
   } catch (e) {
-    console.error(e)
     const error = new Error(`There is a problem with your credentials.`)
     error.status = 401
     next(error)

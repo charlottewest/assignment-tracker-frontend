@@ -1,10 +1,10 @@
 import React from 'react'
-import Form from './Form'
+import GradeForm from './GradeForm'
 
 export default ({ onSubmit, assignment }) => (
   <section className='container'>
     <h1>Edit Grade</h1>
     <hr />
-    <Form assignment={assignment} onSubmit={onSubmit} />
+    <GradeForm assignment={assignment} onSubmit={onSubmit} />
   </section>
 )

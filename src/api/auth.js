@@ -12,7 +12,7 @@ export const login = async (user) => {
     method: 'POST'
   })
   const json = await response.json()
-  console.log(json)
+
   return json
 }
 

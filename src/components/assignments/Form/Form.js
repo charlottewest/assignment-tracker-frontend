@@ -5,8 +5,8 @@ class Form extends React.Component {
   constructor (props) {
     super(props)
     const { assignment = {} } = this.props
-    const { title = '', link = '', description = '', grade = '', total = '' } = assignment
-    this.state = { title, link, description, grade, total }
+    const { title = '', link = '', description = '' } = assignment
+    this.state = { title, link, description }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -29,60 +29,8 @@ class Form extends React.Component {
   }
 
   render () {
-    // const currPage = this.props.location.pathname
-    // let formContent
-    // if ((currPage === '/users/assignments/graded') || (currPage === '/users/assignments/ungraded')) {
-    //   formContent = ['grade', 'total']
-    // } else {
-    //   formContent = ['title', 'link', 'description']
-    // }
-    //
-    // const fieldContent = formContent.map(content => {
-    //   console.log(content)
-    //
-    //   return (
-    //     <div className='form-group'>
-    //       <label htmlFor={content}>{content}</label>
-    //       <input
-    //         className='form-control'
-    //         id={content}
-    //         onChange={this.handleChange}
-    //         name={content}
-    //         type='text'
-    //         value={this.state.title} />
-    //     </div>
-    //   )
-    // })
-    const currPage = this.props.location.pathname
-    let formContent
-    if ((currPage === '/users/assignments/graded') || (currPage === '/users/assignments/ungraded')) {
-      formContent = (
-        <div>
-        <div className='form-group'>
-        <label htmlFor='grade'>Grade</label>
-        <textarea
-          className='form-control'
-          id='grade'
-          onChange={this.handleChange}
-          name='grade'
-          type='text'
-          value={this.state.grade} />
-        </div>
-        <div className='form-group'>
-        <label htmlFor='total'>Total</label>
-        <textarea
-          className='form-control'
-          id='total'
-          onChange={this.handleChange}
-          name='total'
-          type='text'
-          value={this.state.total} />
-        </div>
-        </div>
-      )
-    } else {
-      formContent = (
-        <div>
+    return (
+      <form onSubmit={this.handleSubmit}>
         <div className='form-group'>
           <label htmlFor='title'>Title</label>
           <input
@@ -113,13 +61,6 @@ class Form extends React.Component {
             type='text'
             value={this.state.description} />
         </div>
-        </div>
-      )
-    }
-
-    return (
-      <form onSubmit={this.handleSubmit}>
-        {formContent}
         <button type='submit' className='btn btn-primary'>Submit</button>
       </form>
     )
